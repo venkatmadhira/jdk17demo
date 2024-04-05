@@ -23,7 +23,7 @@ public class Test {
 
         CreditCard creditCard = new CreditCard("1234 5678 9012 3456", "12/25", "123", 10000.0);
 
-        String desiredType = "bgfgh";
+        String desiredType = "Shirt";
         String desiredColor = "Red";
         System.out.println("Credit Card Balance Was:  "+creditCard.getBalance());
 
@@ -34,9 +34,22 @@ public class Test {
         } else {
             System.out.println("Sorry, the purchase was unsuccessful.");
         }
+        String desiredType2 = "Shirt";
+        String desiredColor2 = "Red";
+        System.out.println("Credit Card Balance Was:  "+creditCard.getBalance());
 
-        String desiredType1 = "pant";
+        if (shop.purchaseWithCreditCard(desiredType2, desiredColor2, creditCard)) {
+            System.out.println("Congratulations! You have successfully purchased the " + desiredColor2 + " " + desiredType2 + ".");
+            System.out.println("Shirt price Was:  "+shirts.price);
+            System.out.println("Remaining balance on the credit card: Rs:  " + creditCard.getBalance());
+        } else {
+            System.out.println("Sorry, the purchase was unsuccessful.");
+        }
+
+        String desiredType1 = "Jeans";
         String desiredColor1 = "Blue";
+        System.out.println("Credit Card Balance Was:  "+creditCard.getBalance());
+
         if (shop.purchaseWithCreditCard(desiredType1, desiredColor1, creditCard)) {
             System.out.println("Congratulations! You have successfully purchased the " + desiredColor1 + " " + desiredType1 + ".");
             System.out.println("Shirt price Was:  "+jeans.price);

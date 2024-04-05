@@ -11,19 +11,15 @@ public class Clothing {
         this.availableColors = new ArrayList<>();
         this.price = price;
     }
-
     public void color(String color) {
         availableColors.add(color);
     }
-
     public boolean colorAvailable(String color) {
         return availableColors.contains(color);
     }
-
     public String getType() {
         return type;
     }
-
     public double getPrice() {
         return price;
     }

@@ -10,12 +10,15 @@ public class Shop {
     public void addClothing(Clothing clothing) {
         clothes.add(clothing);
     }
+    public boolean processPayment(CreditCard creditCard, double amount) {
+        creditCard.setBalance(creditCard.getBalance() - amount);
+        return true;
+    }
     public boolean purchaseWithCreditCard(String type, String color, CreditCard creditCard) {
         for (Clothing clothing : clothes) {
             if (clothing.getType().equals(type) && clothing.colorAvailable(color)) {
                 if (creditCard.getBalance() >= clothing.getPrice()) {
                     if (processPayment(creditCard, clothing.getPrice())) {
-                        clothes.remove(clothing);
                         return true;
                     } else {
                         System.out.println("Payment failed. Please try again.");
@@ -29,11 +32,6 @@ public class Shop {
         }
         System.out.println("Sorry, the requested clothing is not available.");
         return false;
-    }
-
-    public boolean processPayment(CreditCard creditCard, double amount) {
-        creditCard.setBalance(creditCard.getBalance() - amount);
-        return true;
     }
 }
 

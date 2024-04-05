@@ -12,7 +12,6 @@ public class CreditCard {
         this.cvv = cvv;
         this.balance = balance;
     }
-
     public double getBalance() {
         return balance;
     }
