@@ -1,37 +1,41 @@
 package newdemo;
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class Shop {
-    public List<Clothing> clothes;
+    public List<Product> clothes;
 
     public Shop() {
         this.clothes = new ArrayList<>();
     }
-    public void addClothing(Clothing clothing) {
+    public void addClothing(Product clothing) {
         clothes.add(clothing);
     }
-    public boolean processPayment(CreditCard creditCard, double amount) {
-        creditCard.setBalance(creditCard.getBalance() - amount);
-        return true;
-    }
-    public boolean purchaseWithCreditCard(String type, String color, CreditCard creditCard) {
-        for (Clothing clothing : clothes) {
+    public Product findClothing(String type, String color) {
+        for (Product clothing : clothes) {
             if (clothing.getType().equals(type) && clothing.colorAvailable(color)) {
-                if (creditCard.getBalance() >= clothing.getPrice()) {
-                    if (processPayment(creditCard, clothing.getPrice())) {
-                        return true;
-                    } else {
-                        System.out.println("Payment failed. Please try again.");
-                        return false;
-                    }
-                } else {
-                    System.out.println("Insufficient balance on the credit card.");
-                    return false;
-                }
+                return clothing;
             }
         }
-        System.out.println("Sorry, the requested clothing is not available.");
-        return false;
+        return null;
+    }
+    public boolean purchase(String type, String color, CreditCard creditCard) {
+        Product selectedClothing = findClothing(type, color);
+        if (selectedClothing != null) {
+            return processPayment(selectedClothing, creditCard);
+        } else {
+            System.out.println("Sorry, the requested clothing is not available.");
+            return false;
+        }
+    }
+    public boolean processPayment(Product clothing, CreditCard creditCard) {
+        double price = clothing.getPrice();
+        if (creditCard.processPayment(price)) {
+            return true;
+        } else {
+            System.out.println("Payment failed. Please try again.");
+            return false;
+        }
     }
 }
-

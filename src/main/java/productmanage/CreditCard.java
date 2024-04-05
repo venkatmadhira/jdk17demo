@@ -1,10 +1,10 @@
-package newdemo;
+package productmanage;
 
-class CreditCard {
+public class CreditCard {
     public String cardNumber;
     public String expirationDate;
     public String cvv;
-    public double balance;
+    private double balance;
 
     public CreditCard(String cardNumber, String expirationDate, String cvv, double balance) {
         this.cardNumber = cardNumber;
@@ -12,18 +12,10 @@ class CreditCard {
         this.cvv = cvv;
         this.balance = balance;
     }
-
-    public boolean processPayment(double amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            return true;
-        } else {
-            System.out.println("Insufficient balance on the credit card.");
-            return false;
-        }
-    }
     public double getBalance() {
         return balance;
     }
-
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
