@@ -1,15 +1,15 @@
 package newdemo;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Clothing {
+    public String type;
+    public List<String> availableColors;
+    public double price;
 
-    private String type;
-    private List<String> availableColors;
-
-    public Clothing(String type) {
+    public Clothing(String type, double price) {
         this.type = type;
         this.availableColors = new ArrayList<>();
+        this.price = price;
     }
 
     public void color(String color) {
@@ -23,4 +23,9 @@ public class Clothing {
     public String getType() {
         return type;
     }
+
+    public double getPrice() {
+        return price;
+    }
 }
+
