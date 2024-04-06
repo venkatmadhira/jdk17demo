@@ -8,10 +8,14 @@ class Product {
     public List<String> availableColors;
     public double price;
 
-    public Product(String type, double price) {
+    public String size;
+
+    public Product(String type, double price,String size) {
         this.type = type;
         this.availableColors = new ArrayList<>();
         this.price = price;
+        this.size=size;
+
     }
 
     public void color(String color) {
@@ -28,5 +32,9 @@ class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getSize() {
+        return size;
     }
 }

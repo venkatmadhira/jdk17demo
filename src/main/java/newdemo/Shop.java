@@ -12,16 +12,16 @@ public class Shop {
     public void addProduct(Product product) {
         products.add(product);
     }
-    public Product findProduct(String type, String color) {
+    public Product findProduct(String type, String color,String size) {
         for (Product product : products) {
-            if (product.getType().equals(type) && product.colorAvailable(color)) {
+            if (product.getType().equals(type) && product.colorAvailable(color) && product.getSize().equals(size)) {
                 return product;
             }
         }
         return null;
     }
-    public boolean purchase(String type, String color, CreditCard creditCard) {
-        Product selectedProduct= findProduct(type, color);
+    public boolean purchase(String type, String color, CreditCard creditCard,String size) {
+        Product selectedProduct= findProduct(type, color,size);
         if (selectedProduct != null) {
             return processPayment(selectedProduct, creditCard);
         } else {
