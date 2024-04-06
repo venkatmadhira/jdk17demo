@@ -19,9 +19,9 @@ public class Test {
         tShirts.color("White");
         tShirts.color("Maroon");
 
-        shop.addClothing(shirts);
-        shop.addClothing(jeans);
-        shop.addClothing(tShirts);
+        shop.addProduct(shirts);
+        shop.addProduct(jeans);
+        shop.addProduct(tShirts);
 
         String desiredType = "Shirt";
         String desiredColor = "Red";

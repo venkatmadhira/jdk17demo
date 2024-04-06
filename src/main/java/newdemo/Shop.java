@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
-    public List<Product> clothes;
+    public List<Product> products;
 
     public Shop() {
-        this.clothes = new ArrayList<>();
+        this.products = new ArrayList<>();
     }
-    public void addClothing(Product clothing) {
-        clothes.add(clothing);
+    public void addProduct(Product product) {
+        products.add(product);
     }
-    public Product findClothing(String type, String color) {
-        for (Product clothing : clothes) {
-            if (clothing.getType().equals(type) && clothing.colorAvailable(color)) {
-                return clothing;
+    public Product findProduct(String type, String color) {
+        for (Product product : products) {
+            if (product.getType().equals(type) && product.colorAvailable(color)) {
+                return product;
             }
         }
         return null;
     }
     public boolean purchase(String type, String color, CreditCard creditCard) {
-        Product selectedClothing = findClothing(type, color);
-        if (selectedClothing != null) {
-            return processPayment(selectedClothing, creditCard);
+        Product selectedProduct= findProduct(type, color);
+        if (selectedProduct != null) {
+            return processPayment(selectedProduct, creditCard);
         } else {
             System.out.println("Sorry, the requested clothing is not available.");
             return false;
         }
     }
-    public boolean processPayment(Product clothing, CreditCard creditCard) {
-        double price = clothing.getPrice();
+    public boolean processPayment(Product product, CreditCard creditCard) {
+        double price = product.getPrice();
         if (creditCard.processPayment(price)) {
             return true;
         } else {
