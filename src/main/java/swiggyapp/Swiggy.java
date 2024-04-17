@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Swiggy {
-    public List<Restaurant> restaurants;
+    private List<Restaurant> restaurants;
 
     public Swiggy() {
         this.restaurants = new ArrayList<>();
@@ -13,9 +13,9 @@ public class Swiggy {
         restaurants.add(restaurant);
     }
 
-    public boolean restaurant(String restaurantName) {
+    public boolean hasRestaurant(String restaurantName) {
         for (Restaurant restaurant : restaurants) {
-            if (restaurant.getName().equals(restaurantName)) {
+            if (restaurant.getName().equalsIgnoreCase(restaurantName)) {
                 return true;
             }
         }
@@ -24,7 +24,7 @@ public class Swiggy {
 
     public Restaurant getRestaurant(String restaurantName) {
         for (Restaurant restaurant : restaurants) {
-            if (restaurant.getName().equals(restaurantName)) {
+            if (restaurant.getName().equalsIgnoreCase(restaurantName)) {
                 return restaurant;
             }
         }

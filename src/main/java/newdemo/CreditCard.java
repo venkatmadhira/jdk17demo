@@ -12,7 +12,6 @@ class CreditCard {
         this.cvv = cvv;
         this.balance = balance;
     }
-
     public boolean processPayment(double amount) {
         if (balance >= amount) {
             balance -= amount;

@@ -1,23 +1,28 @@
 package swiggyapp;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Restaurant {
 
-    public String name;
-    public List<Dish> menu;
+    private String name;
+    private Address address;
+    private List<Dish> menu;
+    private double rating;
 
-    public Restaurant(String name) {
+    public Restaurant(String name, Address address) {
         this.name = name;
+        this.address = address;
         this.menu = new ArrayList<>();
+        this.rating = 0; // Initialize rating to 0
     }
 
     public void addToMenu(Dish dish) {
         menu.add(dish);
     }
 
-    public boolean dishAvail(String dishName) {
+    public boolean hasDish(String dishName) {
         for (Dish dish : menu) {
-            if (dish.getName().equals(dishName)) {
+            if (dish.getName().equalsIgnoreCase(dishName)) {
                 return true;
             }
         }
@@ -26,7 +31,7 @@ public class Restaurant {
 
     public Dish getDish(String dishName) {
         for (Dish dish : menu) {
-            if (dish.getName().equals(dishName)) {
+            if (dish.getName().equalsIgnoreCase(dishName)) {
                 return dish;
             }
         }
@@ -35,5 +40,17 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }
