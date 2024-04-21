@@ -34,5 +34,6 @@ public class Test {
         restaurentList.forEach(restaurent3-> {
             System.out.println("Consumer " +restaurent3);
         });
+        System.out.println(58&49);
     }
 }
