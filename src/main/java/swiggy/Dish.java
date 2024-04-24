@@ -1,6 +1,6 @@
-package swiggyapp;
+package swiggy;
 
-class Dish {
+public class Dish {
     private String name;
     private double price;
     private double rating;
@@ -27,5 +27,3 @@ class Dish {
         this.rating = rating;
     }
 }
-
-

@@ -1,6 +1,6 @@
-package swiggyapp;
+package swiggy;
 
-class Address {
+public class Address {
     private String street;
     private String city;
     private String zipCode;

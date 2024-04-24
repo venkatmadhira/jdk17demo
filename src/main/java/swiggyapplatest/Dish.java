@@ -1,20 +1,18 @@
-package swiggyapp;
+package swiggyapplatest;
+public class Dish {
+    public String name;
 
-class Dish {
-    private String name;
-    private double price;
-    private double rating;
+    public double price;
+    public double rating;
 
     public Dish(String name, double price) {
         this.name = name;
         this.price = price;
         this.rating = 0;
     }
-
     public String getName() {
         return name;
     }
-
     public double getPrice() {
         return price;
     }
@@ -25,6 +23,15 @@ class Dish {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", rating=" + rating +
+                '}';
     }
 }
 

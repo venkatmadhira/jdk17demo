@@ -1,8 +1,8 @@
-package swiggyapp;
+package swiggy;
 
-class Payment {
-    private double amount;
-    private String paymentMethod;
+public class Payment {
+    public double amount;
+    public String paymentMethod;
 
     public Payment(double amount, String paymentMethod) {
         this.amount = amount;

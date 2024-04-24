@@ -1,10 +1,8 @@
-package swiggyapp;
+package swiggy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 
-class Restaurant {
+public class Restaurant {
     private String name;
     private Address address;
     private List<Dish> menu;
@@ -16,17 +14,17 @@ class Restaurant {
         this.menu = new ArrayList<>();
         this.rating = 0;
     }
-
     public void addToMenu(Dish dish) {
         menu.add(dish);
     }
-
-    public Supplier<Optional<Dish>> getDishSupplier(String dishName) {
-        return () -> menu.stream()
-                .filter(dish -> dish.getName().equalsIgnoreCase(dishName))
-                .findFirst();
+    public Dish getDish(String dishName) {
+        for (Dish dish : menu) {
+            if (dish.getName().equalsIgnoreCase(dishName)) {
+                return dish;
+            }
+        }
+        return null;
     }
-
     public String getName() {
         return name;
     }

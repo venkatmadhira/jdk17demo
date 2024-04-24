@@ -1,9 +1,10 @@
 package swiggyapp;
-
-public class SwiggyService {
-
+import java.util.Arrays;
+class SwiggyService {
     public void orderFood() {
         Swiggy swiggy = new Swiggy();
+        RestaurantService restaurantService=new RestaurantService();
+        DishService dishService=new DishService();
 
         Dish biryani = new Dish("Biryani", 150.00);
         Dish chicken65 = new Dish("Chicken65", 180.00);
@@ -31,21 +32,18 @@ public class SwiggyService {
         String restaurantName = "Jail Mandi";
         String[] dishNames = {"Mandi", "Biryani"};
 
-        Restaurant foundRestaurant = RestaurantService.findRestaurant(swiggy, restaurantName);
-        if (foundRestaurant != null) {
-            for (String dishName : dishNames) {
-                Dish orderedDish = DishService.findDish(foundRestaurant, dishName);
-                if (orderedDish != null) {
-                    System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
-                            " located at " + foundRestaurant.getAddress() +
-                            " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
-                            + "  ,  with Restaurant rating: " + foundRestaurant.getRating());
-                } else {
-                    System.out.println("Sorry, " + foundRestaurant.getName() + " does not have " + dishName);
-                }
-            }
-        } else {
-            System.out.println("Sorry, " + restaurantName + " is not available on Swiggy.");
-        }
+        PaymentService paymentService = new PaymentService();
+
+        restaurantService.findRestaurant(swiggy, restaurantName).get().ifPresent(foundRestaurant ->
+                Arrays.stream(dishNames).forEach(dishName -> dishService.findDish(foundRestaurant, dishName).get().ifPresent(orderedDish -> {
+                            System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
+                                    " located at " + foundRestaurant.getAddress() +
+                                    " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
+                                    + "  ,  with Restaurant rating: " + foundRestaurant.getRating());
+                            paymentService.makePayment(orderedDish.getPrice(), "Credit Card");
+                        })
+                )
+        );
     }
 }
+

@@ -12,6 +12,7 @@ public class Test {
         account.accountNo = "123456";
         Account fullAccount = accountMap.get(account);
         System.out.println(fullAccount.accountNo);
+
         Predicate<AccountDetails> predicate = (accountDetail) -> accountDetail.type.equals("C");
         List<AccountDetails> creditAccountDetail =
                 fullAccount.accountDetails.stream().filter(accountDetails -> predicate.test(accountDetails)).collect(Collectors.toList());

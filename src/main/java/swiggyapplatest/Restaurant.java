@@ -1,14 +1,11 @@
-package swiggyapp;
+package swiggyapplatest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
-
-class Restaurant {
-    private String name;
-    private Address address;
-    private List<Dish> menu;
-    private double rating;
+public class Restaurant {
+    public String name;
+    public Address address;
+    public List<Dish> menu;
+    public double rating;
 
     public Restaurant(String name, Address address) {
         this.name = name;
@@ -21,18 +18,16 @@ class Restaurant {
         menu.add(dish);
     }
 
-    public Supplier<Optional<Dish>> getDishSupplier(String dishName) {
-        return () -> menu.stream()
-                .filter(dish -> dish.getName().equalsIgnoreCase(dishName))
-                .findFirst();
-    }
-
     public String getName() {
         return name;
     }
 
     public Address getAddress() {
         return address;
+    }
+
+    public List<Dish> getMenu() {
+        return menu;
     }
 
     public double getRating() {
@@ -43,3 +38,5 @@ class Restaurant {
         this.rating = rating;
     }
 }
+
+
