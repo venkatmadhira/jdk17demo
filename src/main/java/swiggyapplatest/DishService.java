@@ -1,16 +1,18 @@
 package swiggyapplatest;
-
-import java.util.Optional;
+import java.util.function.Predicate;
 
 public class DishService {
-    public static Optional<Dish> findDish(Restaurant restaurant, String dishName) {
+    public Dish findDish(Restaurant restaurant, String dishName) {
         if (restaurant != null) {
+            Predicate<Dish> dishPredicate = dish -> dish.getName().equalsIgnoreCase(dishName);
             return restaurant.getMenu().stream()
-                    .filter(dish -> dish.getName().equalsIgnoreCase(dishName))
-                    .findFirst();
-        } else {
-            return Optional.empty();
+                    .filter(dishPredicate)
+                    .findFirst()
+                    .orElse(null);
         }
+        return null;
     }
 }
+
+
 

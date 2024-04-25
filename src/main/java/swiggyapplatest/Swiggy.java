@@ -1,9 +1,6 @@
 package swiggyapplatest;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 public class Swiggy {
     public List<Restaurant> restaurants;
 
@@ -15,11 +12,10 @@ public class Swiggy {
         restaurants.add(restaurant);
     }
 
-    public Optional<Restaurant> getRestaurant(String restaurantName) {
-        return restaurants.stream()
-                .filter(restaurant -> restaurant.getName().equalsIgnoreCase(restaurantName))
-                .findFirst();
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
     }
 }
+
 
 

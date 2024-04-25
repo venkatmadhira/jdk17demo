@@ -26,10 +26,6 @@ public class Restaurant {
         return address;
     }
 
-    public List<Dish> getMenu() {
-        return menu;
-    }
-
     public double getRating() {
         return rating;
     }
@@ -37,6 +33,11 @@ public class Restaurant {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    public List<Dish> getMenu() {
+        return menu;
+    }
 }
+
 
 

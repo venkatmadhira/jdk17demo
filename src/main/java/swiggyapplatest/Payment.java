@@ -8,9 +8,11 @@ public class Payment {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
     }
+
     @Override
     public String toString() {
         return "Payment of Rs:" + amount + " made using " + paymentMethod;
     }
 }
+
 

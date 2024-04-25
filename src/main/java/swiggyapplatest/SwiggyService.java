@@ -1,10 +1,10 @@
 package swiggyapplatest;
-import java.util.Optional;
-import java.util.Arrays;
 public class SwiggyService {
 
     public void orderFood() {
         Swiggy swiggy = new Swiggy();
+        RestaurantService restaurantService=new RestaurantService();
+        DishService dishService=new DishService();
 
         Dish biryani = new Dish("Biryani", 150.00);
         Dish chicken65 = new Dish("Chicken65", 180.00);
@@ -41,24 +41,27 @@ public class SwiggyService {
 
         if (loginSuccessful) {
             System.out.println("Login Successful");
-            Optional<Restaurant> foundRestaurant = RestaurantService.findRestaurant(swiggy, restaurantName);
-            foundRestaurant.ifPresent(restaurant -> {
+            Restaurant foundRestaurant = restaurantService.findRestaurant(swiggy, restaurantName).get();
+            if (foundRestaurant != null) {
                 Cart cart = new Cart();
-                Arrays.stream(dishNames).forEach(dishName -> {
-                    Optional<Dish> orderedDish = DishService.findDish(restaurant, dishName);
-                    orderedDish.ifPresent(d -> {
-                        cart.addItem(d);
-                        System.out.println("Ordered " + d.getName() + " from " + restaurant.getName() +
-                                " located at " + restaurant.getAddress() +
-                                " for Rs:" + d.getPrice() + "  , with Dish rating " + d.getRating()
-                                + "  ,  with Restaurant rating: " + restaurant.getRating());
-                    });
-                });
+                for (String dishName : dishNames) {
+                    Dish orderedDish = dishService.findDish(foundRestaurant, dishName);
+                    if (orderedDish != null) {
+                        cart.addItem(orderedDish);
+                        System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
+                                " located at " + foundRestaurant.getAddress() +
+                                " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
+                                + "  ,  with Restaurant rating: " + foundRestaurant.getRating());
+                    } else {
+                        System.out.println("Sorry, " + foundRestaurant.getName() + " does not have " + dishName);
+                    }
+                }
                 System.out.println("Items added to cart: " + cart.getItems());
                 System.out.println("Total Price: " + cart.getTotalPrice());
-
                 paymentService.makePayment(cart.getTotalPrice(), "Credit Card");
-            });
+            } else {
+                System.out.println("Restaurant not found: " + restaurantName);
+            }
         } else {
             System.out.println("Login failed. Please try again.");
         }
@@ -69,6 +72,8 @@ public class SwiggyService {
         swiggyService.orderFood();
     }
 }
+
+
 
 
 

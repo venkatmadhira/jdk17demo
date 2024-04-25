@@ -1,10 +1,17 @@
 package swiggyapplatest;
-
-import java.util.Optional;
-
+import java.util.function.Supplier;
 public class RestaurantService {
-    public static Optional<Restaurant> findRestaurant(Swiggy swiggy, String restaurantName) {
-        return swiggy.getRestaurant(restaurantName);
+    public  Supplier<Restaurant> findRestaurant(Swiggy swiggy, String restaurantName) {
+        return () -> {
+            for (Restaurant restaurant : swiggy.getRestaurants()) {
+                if (restaurant.getName().equalsIgnoreCase(restaurantName)) {
+                    return restaurant;
+                }
+            }
+            return null;
+        };
     }
 }
+
+
 
