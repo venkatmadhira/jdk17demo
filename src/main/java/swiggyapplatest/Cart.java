@@ -1,14 +1,20 @@
 package swiggyapplatest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
 public class Cart {
     public List<Dish> items;
     public Cart() {
         this.items = new ArrayList<>();
     }
-    public void addItem(Dish dish) {
+//    public void addItem(Dish dish) {
+//
+//        items.add(dish);
+//    }
+    Consumer<Dish>addItem=(dish)->{
         items.add(dish);
-    }
+    };
     public List<Dish> getItems() {
         return items;
     }

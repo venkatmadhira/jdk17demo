@@ -47,7 +47,7 @@ public class SwiggyService {
                 for (String dishName : dishNames) {
                     Dish orderedDish = dishService.findDish(foundRestaurant, dishName);
                     if (orderedDish != null) {
-                        cart.addItem(orderedDish);
+                        cart.addItem.accept(orderedDish);
                         System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
                                 " located at " + foundRestaurant.getAddress() +
                                 " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
