@@ -9,12 +9,6 @@ public class Dish {
         this.price = price;
         this.rating = 0;
     }
-    public String getName() {
-        return name;
-    }
-    public double getPrice() {
-        return price;
-    }
     public double getRating() {
         return rating;
     }
