@@ -1,11 +1,9 @@
 package swiggy;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class DishService {
-    public static Dish findDish(Restaurant restaurant, String dishName) {
-        if (restaurant != null) {
-            return restaurant.getDish(dishName);
-        } else {
-            return null;
-        }
+    public Function<Restaurant, Predicate<Dish>> findDishPredicate(String dishName) {
+        return restaurant -> dish -> dish.getName().equalsIgnoreCase(dishName) && restaurant.getMenu().contains(dish);
     }
 }

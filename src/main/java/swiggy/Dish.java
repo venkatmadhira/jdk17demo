@@ -1,5 +1,4 @@
 package swiggy;
-
 public class Dish {
     private String name;
     private double price;
@@ -25,5 +24,14 @@ public class Dish {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", rating=" + rating +
+                '}';
     }
 }

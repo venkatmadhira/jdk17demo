@@ -1,5 +1,4 @@
 package swiggy;
-
 public class Address {
     private String street;
     private String city;
@@ -16,3 +15,4 @@ public class Address {
         return street + ", " + city + ", " + zipCode;
     }
 }
+

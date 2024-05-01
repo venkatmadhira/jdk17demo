@@ -1,7 +1,6 @@
 package swiggy;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Swiggy {
     private List<Restaurant> restaurants;
 
@@ -31,3 +30,4 @@ public class Swiggy {
         return null;
     }
 }
+

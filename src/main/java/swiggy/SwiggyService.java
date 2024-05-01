@@ -1,9 +1,10 @@
 package swiggy;
-
 public class SwiggyService {
 
-    public void orderFood() {
+    public void orderFood() throws CheckedException {
         Swiggy swiggy = new Swiggy();
+        RestaurantService restaurantService = new RestaurantService();
+        DishService dishService = new DishService();
 
         Dish biryani = new Dish("Biryani", 150.00);
         Dish chicken65 = new Dish("Chicken65", 180.00);
@@ -29,23 +30,51 @@ public class SwiggyService {
         swiggy.addRestaurant(restaurant2);
 
         String restaurantName = "Jail Mandi";
-        String[] dishNames = {"Mandi", "Biryani"};
+        String[] dishNames = {"Mandi"};
 
-        Restaurant foundRestaurant = RestaurantService.findRestaurant(swiggy, restaurantName);
-        if (foundRestaurant != null) {
-            for (String dishName : dishNames) {
-                Dish orderedDish = DishService.findDish(foundRestaurant, dishName);
-                if (orderedDish != null) {
-                    System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
-                            " located at " + foundRestaurant.getAddress() +
-                            " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
-                            + "  ,  with Restaurant rating: " + foundRestaurant.getRating());
-                } else {
-                    System.out.println("Sorry, " + foundRestaurant.getName() + " does not have " + dishName);
+        PaymentService paymentService = new PaymentService(new CreditCard(10000));
+        LoginService loginService = new LoginService();
+
+        String mobileNumber = "1234567890";
+        int otp = 1234;
+        boolean loginSuccessful = loginService.validateLogin(mobileNumber, otp);
+
+        if (loginSuccessful) {
+            System.out.println("Login Successful");
+            Restaurant foundRestaurant = restaurantService.findRestaurant(swiggy, restaurantName).get();
+            if (foundRestaurant != null) {
+                Cart cart = new Cart();
+                for (String dishName : dishNames) {
+                    Dish orderedDish = dishService.findDish(foundRestaurant, dishName);
+                    if (orderedDish != null) {
+                        cart.addItem.accept(orderedDish);
+                        System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
+                                " located at " + foundRestaurant.getAddress() +
+                                " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
+                                + "  ,  with Restaurant rating: " + foundRestaurant.getRating());
+                    } else {
+                        throw new CheckedException(ExceptionHandling.NO_DISH_FOUND.code, ExceptionHandling.NO_DISH_FOUND.message);
+                    }
                 }
+                System.out.println("Items added to cart: " + cart.getItems.get());
+                System.out.println("Total Price: " + cart.getTotalPrice());
+                paymentService.makePayment(cart.getTotalPrice(), "Credit Card");
+                System.out.println("Remaining balance in credit card: " + paymentService.getCreditCard().getBalance());
+            } else {
+                throw new CheckedException(ExceptionHandling.NO_RESTAURANT_FOUND.code, ExceptionHandling.NO_RESTAURANT_FOUND.message);
             }
         } else {
-            System.out.println("Sorry, " + restaurantName + " is not available on Swiggy.");
+            throw new CheckedException(ExceptionHandling.LOGIN_FAILED.code, ExceptionHandling.LOGIN_FAILED.message);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwiggyService swiggyService = new SwiggyService();
+        try {
+            swiggyService.orderFood();
+        } catch (CheckedException e) {
+            System.out.println(e.code + "-----" + e.getMessage());
         }
     }
 }
+

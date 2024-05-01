@@ -1,5 +1,4 @@
 package newswiggy;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,33 +8,31 @@ import java.util.function.Supplier;
 public class SwiggyService {
     Supplier<RestaurantResponse> supplierFunction=()->{
 
-        Dish luckyDish1= new Dish("biryani","non-veg");
+        Dish luckyDish1= new Dish("Biryani","Non-Veg");
 
-        Rating dish2Rating= new Rating("4","good");
-
-        Dish luckyDish2= new Dish("biryani","veg");
+        Dish luckyDish2= new Dish("Biryani","Veg");
 
         List<Dish> dishList=new ArrayList<>();
         dishList.add(luckyDish1);
         dishList.add(luckyDish2);
 
-        Rating rest1RAting= new Rating("4","best one in this area");
+        Rating rating2= new Rating("4.2","best one in this area");
 
-        Restaurant restaurant= new Restaurant("lucky",dishList,rest1RAting);
-
-
-        Dish mhefilDish1= new Dish("biryani","non-veg");
+        Restaurant restaurant= new Restaurant("Pista House",dishList,rating2);
 
 
-        Dish mhefilDish2= new Dish("biryani","non- veg");
+        Dish mehfilDish1= new Dish("Biryani","Non-Veg");
+
+
+        Dish mehfilDish2= new Dish("Pulav","Non-Veg");
 
         List<Dish>dishList1=new ArrayList<>();
-        dishList1.add(mhefilDish1);
-        dishList1.add(mhefilDish2);
+        dishList1.add(mehfilDish1);
+        dishList1.add(mehfilDish2);
 
         Rating rating= new Rating("4.5","food is budget friendly ");
 
-        Restaurant restaurant1= new Restaurant("mehfil",dishList1,rating);
+        Restaurant restaurant1= new Restaurant("Mehfil",dishList1,rating);
 
         Map<Integer,Restaurant> restaurantMap= new HashMap<>();
 
@@ -49,18 +46,19 @@ public class SwiggyService {
         RestaurantService restaurantService=new RestaurantService();
 
         UserLoginService userLoginService= new UserLoginService();
-        String userName="anil@123";
-        String passWord="12345";
-        Boolean validate= userLoginService.loginValidate(userName,passWord);
-
-        if(validate) {
-
-            Dish dish = new Dish("biryani", "non-veg");
-
-            restaurantService.getRestuarntService(restaurantResponse, "lucky", dish);
-
+        String userName="abc@gmail.com";
+        String passWord="123456";
+        Boolean validate= null;
+        try {
+            validate = userLoginService.loginValidate(userName,passWord);
+        } catch (CustomCheckedException e) {
+            System.out.println(e.errorCode+"----"+e.getMessage());
         }
 
+        if(validate!=null) {
+            Dish dish = new Dish("Biryani", "Non-Veg");
+            restaurantService.getRestuarntService(restaurantResponse, "Mehfil", dish);
+        }
         return restaurantResponse;
     };
 }

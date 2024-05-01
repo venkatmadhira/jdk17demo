@@ -14,9 +14,11 @@ public class Restaurant {
         this.menu = new ArrayList<>();
         this.rating = 0;
     }
+
     public void addToMenu(Dish dish) {
         menu.add(dish);
     }
+
     public Dish getDish(String dishName) {
         for (Dish dish : menu) {
             if (dish.getName().equalsIgnoreCase(dishName)) {
@@ -25,6 +27,7 @@ public class Restaurant {
         }
         return null;
     }
+
     public String getName() {
         return name;
     }
@@ -39,5 +42,9 @@ public class Restaurant {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public List<Dish> getMenu() {
+        return menu;
     }
 }
