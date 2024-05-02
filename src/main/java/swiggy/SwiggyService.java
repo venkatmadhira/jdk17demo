@@ -45,7 +45,7 @@ public class SwiggyService {
             if (foundRestaurant != null) {
                 Cart cart = new Cart();
                 for (String dishName : dishNames) {
-                    Dish orderedDish = dishService.findDish(foundRestaurant, dishName);
+                    Dish orderedDish= (Dish) dishService.findDishPredicate(foundRestaurant,dishName);
                     if (orderedDish != null) {
                         cart.addItem.accept(orderedDish);
                         System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
@@ -56,10 +56,10 @@ public class SwiggyService {
                         throw new CheckedException(ExceptionHandling.NO_DISH_FOUND.code, ExceptionHandling.NO_DISH_FOUND.message);
                     }
                 }
-                System.out.println("Items added to cart: " + cart.getItems.get());
+                System.out.println("Items added to cart: " + cart.getAddItem());
                 System.out.println("Total Price: " + cart.getTotalPrice());
                 paymentService.makePayment(cart.getTotalPrice(), "Credit Card");
-                System.out.println("Remaining balance in credit card: " + paymentService.getCreditCard().getBalance());
+                System.out.println("Remaining balance in credit card: " + paymentService.getPayments());
             } else {
                 throw new CheckedException(ExceptionHandling.NO_RESTAURANT_FOUND.code, ExceptionHandling.NO_RESTAURANT_FOUND.message);
             }

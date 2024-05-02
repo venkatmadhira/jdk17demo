@@ -30,7 +30,7 @@ class SwiggyService {
         swiggy.addRestaurant(restaurant2);
 
         String restaurantName = "Jail Mandi";
-        String[] dishNames = {"Mandi", "Biryani"};
+        String[] dishNames = {"Mandi"};
 
         PaymentService paymentService = new PaymentService();
 

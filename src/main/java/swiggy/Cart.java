@@ -15,6 +15,10 @@ public class Cart {
         return items;
     }
 
+    public Consumer<Dish> getAddItem() {
+        return addItem;
+    }
+
     public double getTotalPrice() {
         return items.stream().mapToDouble(Dish::getPrice).sum();
     }
