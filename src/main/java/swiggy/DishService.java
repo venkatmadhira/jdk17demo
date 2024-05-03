@@ -1,9 +1,17 @@
 package swiggy;
-import java.util.function.Function;
+
 import java.util.function.Predicate;
 
 public class DishService {
-    public Function<Restaurant, Predicate<Dish>> findDishPredicate(Restaurant restaurant1,String dishName) {
-        return restaurant -> dish -> dish.getName().equalsIgnoreCase(dishName) && restaurant.getMenu().contains(dish);
+    public Dish findDish(Restaurant restaurant, String dishName) throws CheckedException {
+        if (restaurant != null) {
+            Predicate<Dish> dishPredicate = dish -> dish.name.equalsIgnoreCase(dishName);
+            return restaurant.getMenu().stream()
+                    .filter(dishPredicate)
+                    .findFirst()
+                    .orElse(null);
+        } else {
+            throw new CheckedException(ExceptionHandling.NO_DISH_FOUND.code, ExceptionHandling.NO_DISH_FOUND.message);
+        }
     }
 }

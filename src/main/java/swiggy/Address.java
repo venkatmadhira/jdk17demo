@@ -1,18 +1,18 @@
 package swiggy;
-public class Address {
-    private String street;
-    private String city;
-    private String zipCode;
 
-    public Address(String street, String city, String zipCode) {
+public class Address {
+    public String street;
+    public String city;
+    public String pinCode;
+
+    public Address(String street, String city, String pinCode) {
         this.street = street;
         this.city = city;
-        this.zipCode = zipCode;
+        this.pinCode = pinCode;
     }
 
     @Override
     public String toString() {
-        return street + ", " + city + ", " + zipCode;
+        return street + ", " + city + ", " + pinCode;
     }
 }
-

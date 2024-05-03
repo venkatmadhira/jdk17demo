@@ -1,4 +1,5 @@
 package swiggy;
+
 public class SwiggyService {
 
     public void orderFood() throws CheckedException {
@@ -30,9 +31,9 @@ public class SwiggyService {
         swiggy.addRestaurant(restaurant2);
 
         String restaurantName = "Jail Mandi";
-        String[] dishNames = {"Mandi"};
+        String[] dishNames = {"Mandi","Biryani"};
 
-        PaymentService paymentService = new PaymentService(new CreditCard(10000));
+        PaymentService paymentService = new PaymentService();
         LoginService loginService = new LoginService();
 
         String mobileNumber = "1234567890";
@@ -45,21 +46,20 @@ public class SwiggyService {
             if (foundRestaurant != null) {
                 Cart cart = new Cart();
                 for (String dishName : dishNames) {
-                    Dish orderedDish= (Dish) dishService.findDishPredicate(foundRestaurant,dishName);
+                    Dish orderedDish = dishService.findDish(foundRestaurant, dishName);
                     if (orderedDish != null) {
                         cart.addItem.accept(orderedDish);
-                        System.out.println("Ordered " + orderedDish.getName() + " from " + foundRestaurant.getName() +
+                        System.out.println("Ordered " + orderedDish.name + " from " + foundRestaurant.getName() +
                                 " located at " + foundRestaurant.getAddress() +
-                                " for Rs:" + orderedDish.getPrice() + "  , with Dish rating " + orderedDish.getRating()
+                                " for Rs:" + orderedDish.price + "  , with Dish rating " + orderedDish.getRating()
                                 + "  ,  with Restaurant rating: " + foundRestaurant.getRating());
                     } else {
                         throw new CheckedException(ExceptionHandling.NO_DISH_FOUND.code, ExceptionHandling.NO_DISH_FOUND.message);
                     }
                 }
-                System.out.println("Items added to cart: " + cart.getAddItem());
+                System.out.println("Items added to cart: " + cart.getItems.get());
                 System.out.println("Total Price: " + cart.getTotalPrice());
-                paymentService.makePayment(cart.getTotalPrice(), "Credit Card");
-                System.out.println("Remaining balance in credit card: " + paymentService.getPayments());
+                paymentService.makePayment(cart.getTotalPrice(), "CreditCard");
             } else {
                 throw new CheckedException(ExceptionHandling.NO_RESTAURANT_FOUND.code, ExceptionHandling.NO_RESTAURANT_FOUND.message);
             }
@@ -77,4 +77,3 @@ public class SwiggyService {
         }
     }
 }
-

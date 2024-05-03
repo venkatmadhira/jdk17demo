@@ -1,32 +1,29 @@
 package swiggy;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaymentService {
-    private List<Payment> payments;
-    private CreditCard creditCard;
+    private Map<String, Payment> paymentMethods;
 
-    public PaymentService(CreditCard creditCard) {
-        this.payments = new ArrayList<>();
-        this.creditCard = creditCard;
+    public PaymentService() {
+        this.paymentMethods = new HashMap<>();
+        paymentMethods.put("Phonepay", new Phonepay(10000));
+        paymentMethods.put("CreditCard", new CreditCard(25000));
+        paymentMethods.put("Cash", new Cash());
     }
 
     public void makePayment(double amount, String paymentMethod) {
-        if (paymentMethod.equalsIgnoreCase("Credit Card")) {
-            if (creditCard.getBalance() >= amount) {
-                creditCard.deductAmount(amount);
-                System.out.println("Payment of Rs:" + amount + " made using " + paymentMethod);
-            } else {
-                System.out.println("Insufficient balance in credit card.");
-            }
-        } else {
+        Payment payment = paymentMethods.get(paymentMethod);
+
+        if (payment == null) {
             System.out.println("Invalid payment method.");
+            return;
+        }
+        try {
+            payment.makePayment(amount);
+        } catch (CheckedException e) {
+            System.out.println(e.code+"      --   "+e.getMessage() );
         }
     }
-
-    public List<Payment> getPayments() {
-        return payments;
-    }
 }
-
