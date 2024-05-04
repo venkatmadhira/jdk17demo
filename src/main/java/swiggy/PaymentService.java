@@ -13,17 +13,13 @@ public class PaymentService {
         paymentMethods.put("Cash", new Cash());
     }
 
-    public void makePayment(double amount, String paymentMethod) {
+    public void makePayment(double amount, String paymentMethod) throws CheckedException {
         Payment payment = paymentMethods.get(paymentMethod);
 
         if (payment == null) {
             System.out.println("Invalid payment method.");
             return;
         }
-        try {
-            payment.makePayment(amount);
-        } catch (CheckedException e) {
-            System.out.println(e.code+"      --   "+e.getMessage() );
-        }
+        payment.makePayment(amount);
     }
 }

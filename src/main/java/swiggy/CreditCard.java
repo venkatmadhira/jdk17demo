@@ -6,11 +6,6 @@ public class CreditCard implements Payment {
     public CreditCard(double balance) {
         this.balance = balance;
     }
-
-    public double getBalance() {
-        return balance;
-    }
-
     @Override
     public void makePayment(double amount) throws CheckedException {
         if (amount <= balance) {

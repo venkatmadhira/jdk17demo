@@ -31,12 +31,12 @@ public class SwiggyService {
         swiggy.addRestaurant(restaurant2);
 
         String restaurantName = "Jail Mandi";
-        String[] dishNames = {"Mandi","Biryani"};
+        String[] dishNames = {"Mandi"};
 
         PaymentService paymentService = new PaymentService();
         LoginService loginService = new LoginService();
 
-        String mobileNumber = "1234567890";
+        String mobileNumber="1234567890";
         int otp = 1234;
         boolean loginSuccessful = loginService.validateLogin(mobileNumber, otp);
 
@@ -77,3 +77,4 @@ public class SwiggyService {
         }
     }
 }
+
