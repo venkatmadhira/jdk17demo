@@ -3,6 +3,7 @@ package swiggy;
 public class SwiggyService {
 
     public void orderFood() throws CheckedException {
+        User user1 =new User();
         Swiggy swiggy = new Swiggy();
         RestaurantService restaurantService = new RestaurantService();
         DishService dishService = new DishService();
@@ -35,8 +36,10 @@ public class SwiggyService {
         swiggy.addRestaurant(restaurant1);
         swiggy.addRestaurant(restaurant2);
 
+        user1.swiggy=swiggy;
+
         SwiggyProcess swiggyProcess=new SwiggyProcess();
-        swiggyProcess.process(restaurantService,dishService,swiggy);
+        swiggyProcess.process(restaurantService,dishService,user1.swiggy);
 
     }
 

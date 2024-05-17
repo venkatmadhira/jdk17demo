@@ -1,10 +1,9 @@
 package swiggy;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Swiggy {
-    public List<Restaurant> restaurants;
+    private List<Restaurant> restaurants;
 
     public Swiggy() {
         this.restaurants = new ArrayList<>();

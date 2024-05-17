@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
-    public String name;
-    public Address address;
-    public List<Dish> menu;
-    public double rating;
+    private String name;
+    private Address address;
+    private List<Dish> menu;
+    private double rating;
 
     public Restaurant(String name, Address address) {
         this.name = name;
